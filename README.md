@@ -36,6 +36,7 @@
 **❓ What did I use?**
 * JavaScript
 * [Cloudflare Workers](https://workers.cloudflare.com/)
+* [Docker](https://www.docker.com/)
 * [Seerr Notifications](https://docs.seerr.dev/using-seerr/notifications/webhook)
 * [CallMeBot](https://www.callmebot.com/)
 * [Coding](https://code.visualstudio.com/)
