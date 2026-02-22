@@ -40,7 +40,7 @@
 * [Coding](https://code.visualstudio.com/)
 * [Git management](https://desktop.github.com/)
 
-## 🐍 Using Cloudflare Workers to run Seerr Notifier
+## ☁️ Using Cloudflare Workers to run Seerr Notifier
 1) Use this repository as a template (make sure it's private)
 2) Edit `wrangler.jsonc` according to [Environment variables](#%EF%B8%8F-environment-variables)
 3) Deploy a new Worker in Cloudflare from template of this repository with edited `wrangler.jsonc`
