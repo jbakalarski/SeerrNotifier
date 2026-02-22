@@ -1,3 +1,7 @@
 LICENSE.md
 README.md
 assets/
+.github/
+docker-compose.yml
+Dockerfile
+entrypoint.sh
