@@ -30,7 +30,7 @@
 **❓ What is this?** Seerr Notifier is a service that receives notifications from Seerr and instantly sends a Messenger alert when a requested movie or series becomes available.
 
 **❓ How to use it?**
-* [**Using Cloudflare**](#-using-cloudflare-workers-to-run-seerr-notifier)
+* [**Using Cloudflare Workers**](#%EF%B8%8F-using-cloudflare-workers-to-run-seerr-notifier)
 
 **❓ What did I use?**
 * JavaScript
