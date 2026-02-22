@@ -55,6 +55,10 @@
 2) Run container - `docker-compose up -d`
 3) Edit `config/wrangler.jsonc` according to [Environment variables](#%EF%B8%8F-environment-variables)
 4) Restart container
+5) Grab the `IP:PORT` of your container
+6) Put it in `Notifcations` settings in `Webhook` in Seerr and also `Authorization Header` from `config/wrangler.jsonc`
+7) Enable `Request Available` in `Notification Types`
+8) Save
 
 ## 🛠️ Environment variables
 * `SECRET_TOKEN` - random strong string
