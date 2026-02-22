@@ -31,6 +31,7 @@
 
 **❓ How to use it?**
 * [**Using Cloudflare Workers**](#%EF%B8%8F-using-cloudflare-workers-to-run-seerr-notifier)
+* [**Using docker-compose**](#-using-docker-compose-to-run-seerr-notifier)
 
 **❓ What did I use?**
 * JavaScript
@@ -48,6 +49,12 @@
 5) Put it in `Notifcations` settings in `Webhook` in Seerr and also `Authorization Header` from `wrangler.jsonc`
 6) Enable `Request Available` in `Notification Types`
 7) Save
+
+## 🐳 Using docker-compose to run Seerr Notifier
+1) Copy `docker-compose.yml`
+2) Run container - `docker-compose up -d`
+3) Edit `config/wrangler.jsonc` according to [Environment variables](#%EF%B8%8F-environment-variables)
+4) Restart container
 
 ## 🛠️ Environment variables
 * `SECRET_TOKEN` - random strong string
