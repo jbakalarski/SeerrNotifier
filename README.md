@@ -27,6 +27,9 @@
 
 <br>
 
+> [!WARNING]
+> There are issues with running Seerr Notifier using Docker Compose. Please use Cloudflare Workers instead.
+
 **❓ What is this?** Seerr Notifier is a service that receives notifications from Seerr and instantly sends a Messenger alert when a requested movie or series becomes available.
 
 **❓ How to use it?**
