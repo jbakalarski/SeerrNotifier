@@ -93,6 +93,9 @@ While creating template you can use following template syntax:<br>
 * ⚡ Fast, serverless, no database required
 * 🖥️ Clean logging and debugging output in console
 * 🔐 Secured with a secret token (no public access)
+
+## 💡 To-Do
+* [ ] Add support for sending notifications through Signal, WhatsApp and Telegram
   
 ## 💲 Support
 <p><a href="https://support.jedrzej.me/" target="_blank"> <img align="left" src="https://raw.githubusercontent.com/jbakalarski/jbakalarski/main/assets/supportme.png" width="172" height="56" alt="jbakalarski" /></a></p>
