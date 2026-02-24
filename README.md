@@ -14,8 +14,11 @@
     <a href='https://github.com/jbakalarski/SeerrNotifier'>
         <img src='https://img.shields.io/github/stars/jbakalarski/SeerrNotifier?style=for-the-badge&color=%23cfb002'/>
     </a>
+    <a href='https://hub.docker.com/r/jedrzejme/seerr-notifier'>
+        <img src='https://img.shields.io/docker/pulls/jedrzejme/seerr-notifier?style=for-the-badge&label=DOCKER%20PULLS'/>
+    </a>
     <a href='https://github.com/jbakalarski/SeerrNotifier/tags'>
-        <img src='https://img.shields.io/github/v/tag/jbakalarski/SeerrNotifier?style=for-the-badge&label=version'/>
+        <img src='https://img.shields.io/github/v/tag/jbakalarski/SeerrNotifier?sort=date&style=for-the-badge&label=VERSION&color=%23db34eb'/>
     </a>
     <a href='https://github.com/jbakalarski/SeerrNotifier/issues'>
         <img src='https://img.shields.io/github/issues/jbakalarski/SeerrNotifier?style=for-the-badge&color=%23ff6f00'/>
