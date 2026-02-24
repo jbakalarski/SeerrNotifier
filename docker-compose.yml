@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   seerr-notifier:
-    image: jedrzejme/seerr-notifier:v2.1.0
+    image: jedrzejme/seerr-notifier:v2.1.1
     container_name: seerr-notifier
     ports:
       - "8787:8787" # <Host Port>:<Container Port (do not change)>

@@ -52,7 +52,7 @@
 7) Save
 
 ## 🐳 Using docker-compose to run Seerr Notifier
-1) Copy `docker-compose.yml`, `wrangler.jsonc` and `templates` folder to directory of your choice
+1) Copy `docker-compose.yml` and `wrangler.jsonc` to directory of your choice
 2) Edit `wrangler.jsonc` according to [Environment variables](#%EF%B8%8F-environment-variables)
 3) Run container - `docker-compose up -d`
 4) Grab the `IP:PORT` of your container
