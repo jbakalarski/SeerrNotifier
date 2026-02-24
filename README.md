@@ -27,9 +27,6 @@
 
 <br>
 
-> [!WARNING]
-> There are issues with running Seerr Notifier using Docker Compose. Please use Cloudflare Workers instead.
-
 **❓ What is this?** Seerr Notifier is a service that receives notifications from Seerr and instantly sends a Messenger alert when a requested movie or series becomes available.
 
 **❓ How to use it?**
@@ -55,14 +52,13 @@
 7) Save
 
 ## 🐳 Using docker-compose to run Seerr Notifier
-1) Copy `docker-compose.yml`
-2) Run container - `docker-compose up -d`
-3) Edit `config/wrangler.jsonc` according to [Environment variables](#%EF%B8%8F-environment-variables)
-4) Restart container
-5) Grab the `IP:PORT` of your container
-6) Put it in `Notifcations` settings in `Webhook` in Seerr and also `Authorization Header` from `config/wrangler.jsonc`
-7) Enable `Request Available` in `Notification Types`
-8) Save
+1) Copy `docker-compose.yml`, `wrangler.jsonc` and `templates` folder to directory of your choice
+2) Edit `wrangler.jsonc` according to [Environment variables](#%EF%B8%8F-environment-variables)
+3) Run container - `docker-compose up -d`
+4) Grab the `IP:PORT` of your container
+5) Put it in `Notifcations` settings in `Webhook` in Seerr and also `Authorization Header` from `config/wrangler.jsonc`
+6) Enable `Request Available` in `Notification Types`
+7) Save
 
 ## 🛠️ Environment variables
 * `SECRET_TOKEN` - random strong string

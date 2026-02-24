@@ -1,4 +1,4 @@
-FROM node:20-bookworm
+FROM node:25
 
 WORKDIR /app
 
@@ -6,12 +6,9 @@ RUN npm install -g wrangler
 
 COPY worker.js .
 
-COPY wrangler.jsonc ./default-config/wrangler.jsonc
-COPY templates ./default-templates
-
-COPY entrypoint.sh ./entrypoint.sh
-RUN chmod +x entrypoint.sh
+COPY wrangler.jsonc ./wrangler.jsonc
+COPY templates ./templates
 
 EXPOSE 8787
 
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ["wrangler", "dev", "--ip", "0.0.0.0", "--port", "8787"]

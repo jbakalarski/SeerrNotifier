@@ -1,12 +1,12 @@
 version: '3.9'
 services:
   seerr-notifier:
-    image: jedrzejme/seerr-notifier:latest
+    image: jedrzejme/seerr-notifier:v2.1.0
     container_name: seerr-notifier
     ports:
       - "8787:8787" # <Host Port>:<Container Port (do not change)>
     volumes:
-      - ./config:/app/config
+      - ./wrangler.jsonc:/app/wrangler.jsonc
       - ./templates:/app/templates
     tty: true
     stdin_open: true
