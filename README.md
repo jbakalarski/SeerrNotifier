@@ -64,7 +64,7 @@
 * `SECRET_TOKEN` - random strong string (used as Authorization Header)
 * `LANG` - language of sent notications (choose one from templates or [create your own](#-creating-your-own-template))
 * `SEND_IMAGES` - `true` or `false`, enables or disables sending requested media poster
-* `CALLMEBOT_KEYS_{user}` - API key from CallMeBot for specific Jellyseerr user - [tutorial on getting CallMeBot API key](https://www.callmebot.com/blog/free-api-facebook-messenger/), you can put multpile keys for one user sperated by space
+* `CALLMEBOT_KEYS_{user}` - API key from CallMeBot for specific Seerr user - [tutorial on getting CallMeBot API key](https://www.callmebot.com/blog/free-api-facebook-messenger/), you can put multpile keys for one user sperated by space
 
 **Sample config of `vars`:**
 ```json
