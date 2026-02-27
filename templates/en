@@ -1,1 +1,1 @@
-Your request for "{{subject}}"" has been accepted and the {{if media_media_type == "movie"}}movie{{endif}}{{if media_media_type == "tv"}}series{{endif}} is now available for watching. Enjoy!
+Your request for "{{subject}}" {{if media_media_type == "tv"}}S{{season}} {{endif}}has been accepted and the {{if media_media_type == "movie"}}movie{{endif}}{{if media_media_type == "tv"}}series{{endif}} is now available for watching. Enjoy!

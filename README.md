@@ -84,9 +84,10 @@
 To create your own template you need to create new file in `templates` directory.<br>
 While creating template you can use following template syntax:<br>
 `{{subject}}` - title of requested media<br>
+`{{season}}` - season number (e.g. `01`, `03`, `10`)<br>
+`{{season_number}}` - raw season number (e.g. `3`)<br>
 `{{if media_media_type == "movie"}}...{{endif}}` - conditional block, content inside will be included only if the media type is a movie<br>
-`{{if media_media_type == "tv"}}...{{endif}}` - conditional block, content inside will be included only if the media type is a TV series<br>
-
+`{{if media_media_type == "tv"}}...{{endif}}` - conditional block, content inside will be included only if the media type is a TV series
 ## 🚀 Features
 * 🔔 Receives notifications from Seerr when a requested movie or series becomes available
 * 💬 Sends instant alerts to Messenger via CallMeBot

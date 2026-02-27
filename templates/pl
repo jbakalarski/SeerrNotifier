@@ -1,1 +1,1 @@
-Twoja prośba o "{{subject}}" została zaakceptowana i {{if media_media_type == "movie"}}film{{endif}}{{if media_media_type == "tv"}}serial{{endif}} jest już dostępny do oglądania. Miłego seansu!
+Twoja prośba o "{{subject}}" {{if media_media_type == "tv"}}S{{season}} {{endif}}została zaakceptowana i {{if media_media_type == "movie"}}film{{endif}}{{if media_media_type == "tv"}}serial{{endif}} jest już dostępny do oglądania. Miłego seansu!

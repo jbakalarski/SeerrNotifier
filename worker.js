@@ -85,6 +85,28 @@ export default {
             const flatData = flattenObject(body);
             console.log("Flattened data:", flatData);
 
+            // --- Extract season number from `extra` array and add to template data ---
+            // If a 'Requested Seasons' entry exists, parse its numeric value and
+            // provide a zero-padded `season` variable for templates (e.g. '03').
+            try {
+                const extraArr = body.extra;
+                if (Array.isArray(extraArr)) {
+                    const seasonEntry = extraArr.find(e => e && e.name === 'Requested Seasons');
+                    if (seasonEntry && seasonEntry.value != null) {
+                        const matched = String(seasonEntry.value).match(/(\d+)/);
+                        if (matched) {
+                            const seasonNum = parseInt(matched[1], 10);
+                            const padded = seasonNum < 10 ? `0${seasonNum}` : String(seasonNum);
+                            flatData.season = padded; // zero-padded season string for templates
+                            flatData.season_number = String(seasonNum); // raw season number as string
+                            console.log(`Detected season: ${seasonNum}, padded: ${padded}`);
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Error extracting season from extra:', e);
+            }
+
             const lang = env.LANG || "pl";
             const templatePath = `/${lang}`;
             console.log(`Fetching template for language: ${lang}`);
