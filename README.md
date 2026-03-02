@@ -87,7 +87,14 @@ While creating template you can use following template syntax:<br>
 `{{season}}` - season number (e.g. `01`, `03`, `10`)<br>
 `{{season_number}}` - raw season number (e.g. `3`)<br>
 `{{if media_media_type == "movie"}}...{{endif}}` - conditional block, content inside will be included only if the media type is a movie<br>
-`{{if media_media_type == "tv"}}...{{endif}}` - conditional block, content inside will be included only if the media type is a TV series
+`{{if media_media_type == "tv"}}...{{endif}}` - conditional block, content inside will be included only if the media type is a TV series<br>
+`{{seasons}}` - array of zero-padded season strings when multiple seasons requested (e.g. [`01`,`02`])<br>
+`{{seasons_numbers}}` - array of raw season numbers as strings (e.g. [`1`,`2`])<br>
+`{{seasons_count}}` - number of requested seasons<br>
+`{{multiple_seasons}}` - boolean, true when more than one season was requested<br>
+`{{for season in seasons}}...{{endfor}}` - loop over requested seasons; inside the loop `{{season}}` is the padded season and `{{season_number}}` is the raw number<br>
+`{{if multiple_seasons}}...{{endif}}` - conditional block that runs only when multiple seasons were requested
+
 ## 🚀 Features
 * 🔔 Receives notifications from Seerr when a requested movie or series becomes available
 * 💬 Sends instant alerts to Messenger via CallMeBot

@@ -21,37 +21,70 @@ function renderTemplate(template, data) {
     console.log("Original template:", template);
     console.log("Data for template:", data);
 
-    // --- Handle conditional blocks ---
-    template = template.replace(
-        /{{if (.*?)}}(.*?){{endif}}/gs,
-        (_, condition, content) => {
-            console.log(`Evaluating condition: "${condition}"`);
+    // Helper: render a block without processing loops (used for per-iteration rendering)
+    function renderBlock(block, ctx) {
+        // conditionals: support both equality and simple truthy checks
+        block = block.replace(/{{if (.*?)}}([\s\S]*?){{endif}}/g, (_, condition, content) => {
             try {
-                const [left, operator, rightRaw] = condition.trim().split(" ");
+                const parts = condition.trim().split(/\s+/);
+                if (parts.length === 1) {
+                    // simple truthy check
+                    const key = parts[0];
+                    return ctx[key] ? content : "";
+                }
+
+                const [left, operator, ...rightParts] = parts;
+                const rightRaw = rightParts.join(" ");
                 const right = rightRaw.replace(/"/g, "");
 
-                if (operator === "==" && data[left] == right) {
-                    console.log(`Condition true for key: ${left}`);
-                    return content;
+                if (operator === "==") {
+                    return ctx[left] == right ? content : "";
                 }
-                console.log(`Condition false for key: ${left}`);
+                if (operator === "!=") {
+                    return ctx[left] != right ? content : "";
+                }
+
                 return "";
             } catch (err) {
                 console.error("Error evaluating condition:", err);
                 return "";
             }
-        }
-    );
+        });
 
-    // --- Replace variables ---
-    template = template.replace(/{{(.*?)}}/g, (_, key) => {
-        const value = data[key.trim()] ?? "";
-        console.log(`Replacing variable: ${key.trim()} => ${value}`);
-        return value;
+        // Replace variables
+        block = block.replace(/{{(.*?)}}/g, (_, key) => {
+            const value = ctx[key.trim()];
+            return value != null ? value : "";
+        });
+
+        return block;
+    }
+
+    // --- Handle for-loops: {{for item in collection}}...{{endfor}} ---
+    const forRegex = /{{for\s+(\w+)\s+in\s+(\w+)}}([\s\S]*?){{endfor}}/g;
+    template = template.replace(forRegex, (_, varName, collectionName, content) => {
+        const collection = data[collectionName];
+        if (!Array.isArray(collection) || collection.length === 0) return "";
+
+        const collectionNumbers = data[`${collectionName}_numbers`] || [];
+        const pieces = [];
+
+        for (let i = 0; i < collection.length; i++) {
+            const item = collection[i];
+            const number = collectionNumbers[i] != null ? collectionNumbers[i] : item;
+            const ctx = Object.assign({}, data);
+            ctx[varName] = item; // padded value (e.g. '01')
+            ctx[`${varName}_number`] = number; // raw number (e.g. '1')
+            pieces.push(renderBlock(content, ctx));
+        }
+
+        return pieces.join("");
     });
 
-    console.log("Rendered template:", template);
-    return template;
+    // Finally render remaining conditionals and variables for the whole template
+    const rendered = renderBlock(template, data);
+    console.log("Rendered template:", rendered);
+    return rendered;
 }
 
 export default {
@@ -85,21 +118,43 @@ export default {
             const flatData = flattenObject(body);
             console.log("Flattened data:", flatData);
 
-            // --- Extract season number from `extra` array and add to template data ---
-            // If a 'Requested Seasons' entry exists, parse its numeric value and
-            // provide a zero-padded `season` variable for templates (e.g. '03').
+            // --- Extract season(s) from `extra` array and add to template data ---
+            // Support multiple seasons like '1, 2, 3' and provide:
+            // - `seasons` (array of zero-padded strings)
+            // - `seasons_numbers` (array of raw numbers as strings)
+            // - `seasons_count` (number)
+            // - `multiple_seasons` (boolean)
+            // Keep backward-compatible `season` and `season_number` for first item.
             try {
                 const extraArr = body.extra;
                 if (Array.isArray(extraArr)) {
                     const seasonEntry = extraArr.find(e => e && e.name === 'Requested Seasons');
                     if (seasonEntry && seasonEntry.value != null) {
-                        const matched = String(seasonEntry.value).match(/(\d+)/);
-                        if (matched) {
-                            const seasonNum = parseInt(matched[1], 10);
-                            const padded = seasonNum < 10 ? `0${seasonNum}` : String(seasonNum);
-                            flatData.season = padded; // zero-padded season string for templates
-                            flatData.season_number = String(seasonNum); // raw season number as string
-                            console.log(`Detected season: ${seasonNum}, padded: ${padded}`);
+                        const raw = String(seasonEntry.value);
+                        // split on commas and non-digit separators, keep numbers only
+                        const parts = raw.split(/,|;/).map(p => p.trim()).filter(Boolean);
+                        const seasons = [];
+                        const seasons_numbers = [];
+
+                        for (const part of parts) {
+                            const m = String(part).match(/(\d+)/);
+                            if (m) {
+                                const num = parseInt(m[1], 10);
+                                const padded = num < 10 ? `0${num}` : String(num);
+                                seasons.push(padded);
+                                seasons_numbers.push(String(num));
+                            }
+                        }
+
+                        if (seasons.length > 0) {
+                            flatData.seasons = seasons;
+                            flatData.seasons_numbers = seasons_numbers;
+                            flatData.seasons_count = seasons.length;
+                            flatData.multiple_seasons = seasons.length > 1;
+                            // backward-compatible single season fields (first season)
+                            flatData.season = seasons[0];
+                            flatData.season_number = seasons_numbers[0];
+                            console.log(`Detected seasons: ${seasons.join(', ')}`);
                         }
                     }
                 }
