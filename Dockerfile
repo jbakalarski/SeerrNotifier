@@ -1,11 +1,11 @@
-FROM node:25
+FROM node:24-alpine
 
 WORKDIR /app
 RUN mkdir -p /default
 
-RUN npm install -g wrangler
-
+COPY package.json .
 COPY worker.js .
+COPY server.js .
 COPY wrangler.jsonc .
 COPY templates/ /default/templates/
 
@@ -14,4 +14,5 @@ RUN chmod +x /entrypoint.sh
 
 EXPOSE 8787
 
-CMD ["/bin/bash", "-c", "cp -rn /default/templates/* /app/templates/ && wrangler dev --ip 0.0.0.0 --port 8787"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["node", "server.js"]
